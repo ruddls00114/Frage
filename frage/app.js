@@ -46,4 +46,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`SERVER IS RUNNING AT ${PORT}`);
+});
+
 module.exports = app;
