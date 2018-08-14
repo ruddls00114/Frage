@@ -15,7 +15,7 @@ router.get('/:category', async (req, res, next) => {
     let result;
     let selectQuery =
     `
-    SELECT frage_image, title,updatedate, user_name
+    SELECT frage_image, title,updatedate, user_name , content
     FROM boards
     where category = ?
     `;
