@@ -31,8 +31,8 @@ router.post('/', async (req, res, next) => {
 
         let insertUserQuery =
                 `
-            INSERT INTO users(id,pwd,name,major,image,intro)
-            VALUES(?,?,?,?,?,?);
+            INSERT INTO users(id, pwd, name, major, image, intro)
+            VALUES(?, ?, ?, ?, ?, ?);
             `;
             
         let userResult = await db.Query(insertUserQuery, [id, pwd, name, major,'https://s3.ap-northeast-2.amazonaws.com/kyoung/frage.png',intro]);

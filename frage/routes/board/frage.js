@@ -26,14 +26,14 @@ router.post('/',upload.single('frage_image'),async (req, res, next) => {
     `
     let insertQuery = 
     `
-    INSERT INTO boards(title, category, content, frage_image, writedate, updatedate, user_name)
-    VALUES(?, ?, ?, ?, ? ,? ,?)
+    INSERT INTO boards(title, category, content, frage_image, writedate, updatedate, user_idx)
+    VALUES(?, ?, ?, ?, ? ,?, ?)
     `
 
     try {
         let userResult = await db.Query(selectUserQuery,[user_idx]);
 
-        let insertResult = await db.Query(insertQuery,[title, category, content, frage_image,moment().format('YYYY-MM-DD hh:mm'), moment().format("YYYY-MM-DD hh:mm"), userResult[0].name]);
+        let insertResult = await db.Query(insertQuery,[title, category, content, frage_image,moment().format('YYYY-MM-DD hh:mm'), moment().format("YYYY-MM-DD hh:mm"),user_idx]);
 
         
     } catch (error) {
@@ -56,7 +56,7 @@ router.put('/',upload.single('frage_image'),async (req, res, next) => {
     let updateQuery = 
     `
     UPDATE boards
-    SET title = ?,content = ? , frage_image = ? ,updatedate = ?
+    SET title = ?, content = ? ,frage_image = ?, updatedate = ?
     WHERE idx = ?
     `
 
