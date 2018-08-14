@@ -37,6 +37,7 @@ router.post('/', async (req, res, next) => {
             return next("401");
         }
     } catch (error) {
+        console.log(error)
         return next(error);
     }
 

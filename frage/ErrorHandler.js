@@ -1,5 +1,5 @@
 const expressValidation = require('express-validation');
-const log = require('./config/logger');
+// const log = require('./config/logger');
 const errors = require('./errors');
 const moment = require('moment');
 
@@ -12,7 +12,7 @@ module.exports = (app) => {
     app.use((err, req, res, next) => {
 
         // 에러 로그
-        log.error(` :  ${req.path}] ` + " [ Status Code: " + err + " : " + errors[err].description + " ] [ Time : " + moment().format('YYYY.MM.DD h:mm:ss a ]') );
+        // log.error(` :  ${req.path}] ` + " [ Status Code: " + err + " : " + errors[err].description + " ] [ Time : " + moment().format('YYYY.MM.DD h:mm:ss a ]') );
 
         let miss_param = false;
         if (err instanceof expressValidation.ValidationError) {  // 잘못된 파라미터 확인

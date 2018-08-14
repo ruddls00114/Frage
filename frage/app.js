@@ -30,21 +30,36 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 
 
+
+// error handler
+require('./ErrorHandler')(app);
+
+app.use(function(req, res, next)
+{
+  var err = new Error('Not Found');
+  err.status = 404;
+  err.path = req.path;
+  log.error(err);
+  next(err);
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+// Error handler
+app.use(function(err, req, res, next)
+{
   res.locals.message = err.message;
+  console.log("res.locals.message error : " + res.locals.message);
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+  console.log("res.locals.error error : " + res.locals.error);
 
-  // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error',{errLog : res.locals.error});
 });
+
 
 const PORT = 3000;
 app.listen(PORT, () => {
