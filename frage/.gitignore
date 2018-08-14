@@ -28,3 +28,4 @@ lgot/*
 .public/*
 config/aws_config.json
 config/db_config.json
+DS_Store/
