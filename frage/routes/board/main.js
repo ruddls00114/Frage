@@ -10,16 +10,18 @@ const db = require('../../module/pool.js');
     게시판 홈 
  Method : get
  */
-router.get('/', async (req, res, next) => {
+router.get('/:category', async (req, res, next) => {
+    const {} = req.params.category;
 
     let selectQuery =
     `
-    SELECT iamge, title, tag1, tag2, writedate, user_name
+    SELECT frage_iamge, title, writedate, user_name
     FROM boards
+    where category = ?
     `;
 
     try {
-        let result = await db.Query(selectQuery,[]);
+        let result = await db.Query(selectQuery,[category]);
         
         
     } catch (error) {
@@ -30,43 +32,43 @@ router.get('/', async (req, res, next) => {
 });
 
 
-/*
-   게시판 글 검색
- Method : get
- */
-router.get('/', async (req, res, next) => {
-    const {category,data} = req.query;
-    data = "%"+data+"%";
-    let selectQuery;
-    switch(category){
-        case 0: //제목
-        selectQuery = `
-        SELECT iamge, title, tag1, tag2, writedate, user_name
-        FROM boards
-        where title like "?"
-        `;
-        break;
+// /*
+//    게시판 글 검색
+//  Method : get
+//  */
+// router.get('/', async (req, res, next) => {
+//     const {category,data} = req.query;
+//     data = "%"+data+"%";
+//     let selectQuery;
+//     switch(category){
+//         case 0: //제목
+//         selectQuery = `
+//         SELECT iamge, title, tag1, tag2, writedate, user_name
+//         FROM boards
+//         where title like "?"
+//         `;
+//         break;
 
-        case 1://해쉬태그
-        selectQuery = `
-        SELECT iamge, title, tag1, tag2, writedate, user_name
-        FROM boards
-        where tag1 like "?" OR tag2 like "?"
-        `;
+//         case 1://해쉬태그
+//         selectQuery = `
+//         SELECT iamge, title, tag1, tag2, writedate, user_name
+//         FROM boards
+//         where tag1 like "?" OR tag2 like "?"
+//         `;
 
-        break;
-    }
+//         break;
+//     }
 
-    try {
+//     try {
 
-        let result = await db.Query(selectQuery,[data]);
+//         let result = await db.Query(selectQuery,[data]);
         
-    } catch (error) {
-        return next(error);
-    }
-    return res.r(result);
+//     } catch (error) {
+//         return next(error);
+//     }
+//     return res.r(result);
 
-});
+// });
 
 
 
