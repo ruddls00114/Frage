@@ -27,11 +27,11 @@ router.get('/',async (req, res, next) => {
     try {
         let userResult = await db.Query(selectUserQuery,[user_idx]);
 
-        return res.r(userResult);
-
+        
     } catch (error) {
         return next(error);
     }
+    return res.r(userResult[0]);
 
 });
 

@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const db = require('../../module/pool.js');
 
 /*
-    로그인
+    회원가입
  Method : Post
  */
 router.post('/', async (req, res, next) => {

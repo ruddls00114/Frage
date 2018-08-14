@@ -16,7 +16,6 @@ const db = require('../../module/pool.js');
  */
 router.post('/', async (req, res, next) => {
     let { id, pwd } = req.body;
-    // pwd =encrypt(pwd)
 
     let selectUserQuery =
     `
