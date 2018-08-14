@@ -11,17 +11,17 @@ const db = require('../../module/pool.js');
  Method : get
  */
 router.get('/:category', async (req, res, next) => {
-    const {} = req.params.category;
-
+    const {category} = req.params;
+    let result;
     let selectQuery =
     `
-    SELECT frage_iamge, title, writedate, user_name
+    SELECT frage_image, title,updatedate, user_name
     FROM boards
     where category = ?
     `;
 
     try {
-        let result = await db.Query(selectQuery,[category]);
+        result = await db.Query(selectQuery,[category]);
         
         
     } catch (error) {
