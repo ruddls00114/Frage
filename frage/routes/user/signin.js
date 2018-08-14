@@ -5,13 +5,8 @@ const _crypto = require('crypto');
 const async = require('async');
 const bodyParser = require('body-parser');
 const db = require('../../module/pool.js');
-const secretKey = 'secret';
 
 
-function encrypt(u_password) {
-    const encrypted = _crypto.createHmac('sha512', secretKey).update(u_password).digest('base64');
-    return encrypted;
-}
 
 
 
@@ -25,7 +20,7 @@ router.post('/', async (req, res, next) => {
 
     let selectUserQuery =
     `
-    SELECT id, name, major, image, intro
+    SELECT idx, id, name, major, image, intro
     FROM users
     WHERE id = ? and pwd = ?
     `;
