@@ -19,10 +19,11 @@ router.get('/', async (req, res, next) => {
     let userResult;
     let selectUserQuery =
         `
-    SELECT content,writedate, user_idx, users.name
+    SELECT content,DATE_FORMAT(writedate,"%Y-%m-%d") as date, user_idx, users.name
     FROM replys
     LEFT JOIN users ON replys.user_idx =users.idx
     WHERE board_idx = ?
+    ORDER BY writedate DESC;
     `
     try {
         userResult = await db.Query(selectUserQuery, [board_idx]);
