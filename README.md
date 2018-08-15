@@ -1,1 +1,4 @@
-# frage_codesquad_hackerthon
+# frage
+
+개발자 뿐만 아니라 기획자도 개발에 대한 질문을 자유롭게 올릴 수 있는 게시판입니다.
+
