@@ -10,20 +10,19 @@ const db = require('../../module/pool.js');
     게시판 홈 
  Method : get
  */
-router.get('/:category', async (req, res, next) => {
-    const {category} = req.params;
+router.get('/', async (req, res, next) => {
+
     let result;
     let selectBoardQuery =
     `
-    SELECT users.name,users.major, frage_image, title, DATE_FORMAT(updatedate,"%Y-%m-%d") as updatedate, content
+    SELECT users.name,users.major, frage_image, title,category, DATE_FORMAT(updatedate,"%Y-%m-%d") as updatedate, content
     FROM boards
     RIGHT JOIN users ON users.idx = boards.user_idx
-    where category = ?;
 
     `;
 
     try {
-        result = await db.Query(selectBoardQuery,[category]);
+        result = await db.Query(selectBoardQuery,[]);
 
             
     } catch (error) {
