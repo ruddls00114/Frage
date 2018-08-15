@@ -5,7 +5,7 @@ const async = require('async');
 const bodyParser = require('body-parser');
 const db = require('../../module/pool.js');
 const moment = require('moment');
-const upload = require('../../module/multer.js');
+
 
 //댓글 내용, 작성자 id, name, 날짜
 

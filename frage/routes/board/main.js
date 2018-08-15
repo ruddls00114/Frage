@@ -15,10 +15,10 @@ router.get('/', async (req, res, next) => {
     let result;
     let selectBoardQuery =
     `
-    SELECT users.name,users.major, frage_image, title,category, DATE_FORMAT(updatedate,"%Y-%m-%d") as updatedate, content
+    SELECT users.name,users.major,  title,category, DATE_FORMAT(updatedate,"%Y-%m-%d") as date, content, frage_image
     FROM boards
-    RIGHT JOIN users ON users.idx = boards.user_idx
-
+    LEFT JOIN users ON users.idx = boards.user_idx
+	ORDER BY updatedate DESC;
     `;
 
     try {
