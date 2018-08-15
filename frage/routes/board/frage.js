@@ -17,7 +17,7 @@ router.post('/',upload.single('frage_image'),async (req, res, next) => {
     const {user_idx, title, category, content} =req.body;
 
     var frage_image = req.file ? req.file.location : null;
-    
+    console.log(req.file)
     let selectUserQuery = 
     `
     SELECT name
@@ -32,9 +32,9 @@ router.post('/',upload.single('frage_image'),async (req, res, next) => {
 
     try {
         let userResult = await db.Query(selectUserQuery,[user_idx]);
-
+        console.log(userResult[0])
         let insertResult = await db.Query(insertQuery,[title, category, content, frage_image,moment().format('YYYY-MM-DD hh:mm'), moment().format("YYYY-MM-DD hh:mm"),user_idx]);
-
+        console.log(inserResult)
         
     } catch (error) {
         return next(error);
