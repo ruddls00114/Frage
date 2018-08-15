@@ -15,7 +15,7 @@ router.get('/:category', async (req, res, next) => {
     let result;
     let selectBoardQuery =
     `
-    SELECT users.name, frage_image, title, updatedate, content
+    SELECT users.name,users.major, frage_image, title, updatedate, content
     FROM boards
     RIGHT JOIN users ON users.idx = boards.user_idx
     where category = ?;
