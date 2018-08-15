@@ -15,7 +15,7 @@ router.get('/:category', async (req, res, next) => {
     let result;
     let selectBoardQuery =
     `
-    SELECT users.name,users.major, frage_image, title, updatedate, content
+    SELECT users.name,users.major, frage_image, title, DATE_FORMAT(updatedate,"%Y-%m-%d") as updatedate, content
     FROM boards
     RIGHT JOIN users ON users.idx = boards.user_idx
     where category = ?;
@@ -24,6 +24,7 @@ router.get('/:category', async (req, res, next) => {
 
     try {
         result = await db.Query(selectBoardQuery,[category]);
+
             
     } catch (error) {
         return next(error);
