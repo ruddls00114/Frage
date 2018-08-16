@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
     let userResult;
     let selectUserQuery =
         `
-    SELECT content,DATE_FORMAT(writedate,"%Y-%m-%d") as date, user_idx, users.name
+    SELECT replys.idx AS reply_idx, content, DATE_FORMAT(writedate,"%Y-%m-%d") as date, user_idx, users.name
     FROM replys
     LEFT JOIN users ON replys.user_idx =users.idx
     WHERE board_idx = ?
@@ -53,6 +53,30 @@ router.post('/', async (req, res, next) => {
             `
     try {
         insertQuery = await db.Query(insertQuery, [board_idx, user_idx, content, moment().format('YYYY-MM-DD hh:mm')]);
+
+
+    } catch (error) {
+        return next(error);
+    }
+    return res.r();
+
+});
+
+/*
+    댓글 삭제
+Method : Delete
+*/
+router.delete('/', async (req, res, next) => {
+    const { reply_idx } = req.query;
+
+
+    let deleteQuery =
+        `
+        DELETE FROM replys
+        WHERE idx = ?
+        `
+    try {
+        await db.Query(deleteQuery, [reply_idx]);
 
 
     } catch (error) {

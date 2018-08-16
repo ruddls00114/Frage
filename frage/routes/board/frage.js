@@ -74,7 +74,7 @@ router.put('/',upload.single('frage_image'),async (req, res, next) => {
 
 /*
     글 삭제
- Method : Put 
+ Method : Delete
  */
 router.delete('/',async (req, res, next) => {
     const {idx} =req.query;
